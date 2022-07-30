@@ -1,0 +1,16 @@
+import 'package:flutter/material.dart';
+
+///
+/// @date: ${date_time}
+/// @author: ${user_name}
+/// @remark:
+///
+
+class ${className} extends StatelessWidget {
+  const ${className}({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(), body: Container());
+  }
+}

@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+
+///
+/// @date: ${date_time}
+/// @author: ${user_name}
+/// @remark:
+///
+
+class ${className} extends StatefulWidget {
+  const ${className}({Key? key}) : super(key: key);
+
+  @override
+  _${className}State createState() => _${className}State();
+}
+
+class _${className}State extends State<${className}> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(), body: Container());
+  }
+}

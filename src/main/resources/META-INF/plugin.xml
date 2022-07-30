@@ -1,0 +1,52 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>cn.xxstudy.QuickFlutter</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>QuickFlutter</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="996489865@qq.com" url="https://www.xxstudy.com">XXStudy</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    1. quick create dart template class.<br>
+    2. preview image.<br>
+
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
+    <depends>Dart</depends>
+
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="cn.xxstudy.quickflutter.services.StorageService"/>
+        <projectConfigurable parentId="tools" instance="cn.xxstudy.quickflutter.ui.SettingsConfiguration"/>
+
+    </extensions>
+    <actions>
+        <action id="GeneratorDartAction"
+                class="cn.xxstudy.quickflutter.GeneratorDartAction"
+                text="GeneratorDartAction"
+                icon="/icons/dart.svg"
+                description="GeneratorDartAction">
+
+            <add-to-group
+                    group-id="NewGroup"
+                    anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift meta G"/>
+        </action>
+       
+    </actions>
+</idea-plugin>
