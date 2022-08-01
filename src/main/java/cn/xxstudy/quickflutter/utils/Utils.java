@@ -1,11 +1,15 @@
 package cn.xxstudy.quickflutter.utils;
 
+import cn.xxstudy.quickflutter.services.StorageService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.ProjectScope;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -84,5 +88,20 @@ public class Utils {
             return files;
         }
         return new PsiFile[0];
+    }
+
+    public static @Nullable VirtualFile getVirtualFile(PsiElement element) {
+        try {
+            String filePath;
+            String mainAppName = StorageService.getInstance(element.getProject()).getState().mainAppName;
+            if (mainAppName == null || mainAppName.isEmpty()) {
+                filePath = element.getProject().getBasePath() + "/" + element.getText();
+            } else {
+                filePath = element.getProject().getBasePath() + "/" + mainAppName + "/" + element.getText();
+            }
+            return LocalFileSystem.getInstance().findFileByPath(filePath);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

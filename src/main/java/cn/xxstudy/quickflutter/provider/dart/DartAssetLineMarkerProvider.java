@@ -7,6 +7,7 @@ import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Iconable;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -15,6 +16,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.ProjectScope;
 import com.intellij.ui.scale.ScaleContext;
+import com.intellij.util.IconUtil;
 import com.intellij.util.SVGLoader;
 import com.jetbrains.lang.dart.DartTokenTypes;
 import com.jetbrains.lang.dart.psi.impl.DartReferenceExpressionImpl;
@@ -60,23 +62,23 @@ public class DartAssetLineMarkerProvider extends RelatedItemLineMarkerProvider {
         }
         try {
             Icon icon;
+            VirtualFile virtualFile = Utils.getVirtualFile(element);
             if (Utils.isSvg(dartText)) {
-
-                String filePath;
-                String mainAppName = StorageService.getInstance(project).getState().mainAppName;
-                if (mainAppName == null || mainAppName.isEmpty()) {
-                    filePath = element.getProject().getBasePath() + "/" + element.getText();
-                } else {
-                    filePath = element.getProject().getBasePath() + "/" + mainAppName + "/" + element.getText();
-                }
-                VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(filePath);
                 try {
-                    icon = new ImageIcon(SVGLoader.load(null, virtualFile.getInputStream(), ScaleContext.createIdentity(), 16.0, 16.0));
+                    icon = virtualFile != null
+                            ? new ImageIcon(SVGLoader.load(null, virtualFile.getInputStream(), ScaleContext.createIdentity(), 16.0, 16.0))
+                            : AllIcons.General.LayoutPreviewOnly;
                 } catch (Exception e) {
                     icon = AllIcons.General.LayoutPreviewOnly;
                 }
             } else {
-                icon = AllIcons.General.LayoutPreviewOnly;
+                try {
+                    icon = virtualFile != null
+                            ? IconUtil.getIcon(virtualFile, Iconable.ICON_FLAG_VISIBILITY, element.getProject())
+                            : AllIcons.General.LayoutPreviewOnly;
+                } catch (Exception e) {
+                    icon = AllIcons.General.LayoutPreviewOnly;
+                }
             }
             NavigationGutterIconBuilder<PsiElement> builder =
                     NavigationGutterIconBuilder.create(icon)
