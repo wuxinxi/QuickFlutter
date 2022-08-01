@@ -7,4 +7,6 @@ package cn.xxstudy.quickflutter.data;
  */
 public class StorageData {
     public String userName = "";
+
+    public String mainAppName = "";
 }

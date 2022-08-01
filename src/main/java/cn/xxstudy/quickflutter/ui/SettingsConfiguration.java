@@ -20,6 +20,7 @@ public class SettingsConfiguration implements SearchableConfigurable {
 
     private JPanel rootPanel;
     private JTextField user_name;
+    private JTextField main_app_name;
 
     private final Project project;
 
@@ -40,6 +41,7 @@ public class SettingsConfiguration implements SearchableConfigurable {
     @Override
     public @Nullable JComponent createComponent() {
         user_name.setText(getStorageData().userName);
+        main_app_name.setText(getStorageData().mainAppName);
         return rootPanel;
     }
 
@@ -58,5 +60,6 @@ public class SettingsConfiguration implements SearchableConfigurable {
     public void apply() throws ConfigurationException {
         StorageData data = getStorageData();
         data.userName = user_name.getText().trim();
+        data.mainAppName = main_app_name.getText().trim();
     }
 }
