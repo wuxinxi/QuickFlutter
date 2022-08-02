@@ -1,6 +1,5 @@
 package cn.xxstudy.quickflutter.provider.yaml;
 
-import cn.xxstudy.quickflutter.services.StorageService;
 import cn.xxstudy.quickflutter.utils.Utils;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
@@ -8,7 +7,6 @@ import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -16,16 +14,11 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.ProjectScope;
 import com.intellij.ui.scale.ScaleContext;
 import com.intellij.util.IconUtil;
-import com.intellij.util.ImageLoader;
 import com.intellij.util.SVGLoader;
-import com.intellij.util.ui.JBImageIcon;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Collection;
-import java.util.Objects;
 
 /**
  * @date: 2022/7/31 12:57
