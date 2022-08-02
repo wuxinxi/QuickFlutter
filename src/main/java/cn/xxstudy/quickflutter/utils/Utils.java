@@ -11,6 +11,8 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.ProjectScope;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -49,6 +51,17 @@ public class Utils {
 
     public static boolean isSvg(String name) {
         return name.endsWith(".svg");
+    }
+
+    public static VirtualFile[] getAssetVirtualFile(PsiFile[] psiFiles) {
+        if (psiFiles.length == 0) {
+            return new VirtualFile[]{};
+        }
+        VirtualFile[] virtualFiles = new VirtualFile[psiFiles.length];
+        for (int i = 0; i < psiFiles.length; i++) {
+            virtualFiles[i] = psiFiles[i].getVirtualFile();
+        }
+        return virtualFiles;
     }
 
     public static PsiFile[] getAssetPsiFiles(PsiElement element) {
@@ -92,16 +105,49 @@ public class Utils {
 
     public static @Nullable VirtualFile getVirtualFile(PsiElement element) {
         try {
-            String filePath;
-            String mainAppName = StorageService.getInstance(element.getProject()).getState().mainAppName;
-            if (mainAppName == null || mainAppName.isEmpty()) {
-                filePath = element.getProject().getBasePath() + "/" + element.getText();
+            final String filePath = getPath(element);
+            String path;
+            if (!new File(filePath).exists()) {
+                String fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+                path = filePath.replace(fileName, "3.0x/" + fileName);
+                if (!new File(path).exists()) {
+                    path = filePath.replace(fileName, "2.0x/" + fileName);
+                    if (!new File(path).exists()) {
+                        return null;
+                    }
+                }
             } else {
-                filePath = element.getProject().getBasePath() + "/" + mainAppName + "/" + element.getText();
+                path = filePath;
             }
-            return LocalFileSystem.getInstance().findFileByPath(filePath);
+            return LocalFileSystem.getInstance().findFileByPath(path);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public static String getPath(PsiElement element) {
+        String mainAppName = StorageService.getInstance(element.getProject()).getState().mainAppName;
+        if (mainAppName == null || mainAppName.isEmpty()) {
+            return element.getProject().getBasePath() + "/" + element.getText();
+        } else {
+            return element.getProject().getBasePath() + "/" + mainAppName + "/" + element.getText();
+        }
+    }
+
+    public static void writeLog(String content) {
+        try {
+            String logPath = "/Users/sensiwu/Desktop/";
+            File file = new File(logPath + "log2.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fileWritter = new FileWriter(file, true);
+            fileWritter.write(content);
+            fileWritter.write("\n");
+            fileWritter.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
