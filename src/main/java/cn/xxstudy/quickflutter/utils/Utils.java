@@ -101,6 +101,10 @@ public class Utils {
         if (files.length > 0) {
             return files;
         }
+        files = FilenameIndex.getFilesByName(project, nameWithoutSuffix + ".svg", ProjectScope.getProjectScope(project));
+        if (files.length > 0) {
+            return files;
+        }
         return new PsiFile[0];
     }
 
@@ -136,8 +140,10 @@ public class Utils {
     }
 
     public static void writeLog(String content) {
+        if (true) return;
         try {
-            String logPath=System.getProperty("user.dir");
+//            String logPath=System.getProperty("user.dir");
+            String logPath = "/Users/sensiwu/Desktop";
             File file = new File(logPath + "/log2.txt");
             if (!file.exists()) {
                 file.createNewFile();

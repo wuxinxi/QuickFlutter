@@ -58,7 +58,9 @@
             <keyboard-shortcut keymap="$default" first-keystroke="shift meta G"/>
         </action>
 
-        <action id="GeneratorResAction" class="cn.xxstudy.quickflutter.GeneratorResAction" text="GeneratorResAction"
+        <action id="GeneratorResAction"
+                class="cn.xxstudy.quickflutter.GeneratorResAction"
+                text="GeneratorResAction"
                 description="GeneratorResAction">
             <keyboard-shortcut keymap="$default" first-keystroke="shift meta I"/>
         </action>
