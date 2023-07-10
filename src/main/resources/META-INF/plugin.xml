@@ -64,5 +64,10 @@
                 description="GeneratorResAction">
             <keyboard-shortcut keymap="$default" first-keystroke="shift meta I"/>
         </action>
+        <action id="cn.xxstudy.quickflutter.shortcut.camelcase" class="cn.xxstudy.quickflutter.shortcut.CamelcaseFormat"
+                text="CamelcaseFormat" description="CamelcaseFormat">
+            <add-to-group group-id="CodeMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift meta T"/>
+        </action>
     </actions>
 </idea-plugin>

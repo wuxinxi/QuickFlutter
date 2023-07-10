@@ -157,4 +157,16 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static String underscoreToCamel(String underscore) {
+        String[] words = underscore.split("_");
+        StringBuilder camel = new StringBuilder(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            camel.append(Character.toUpperCase(words[i].charAt(0)));
+            if (words[i].length() > 1) {
+                camel.append(words[i].substring(1));
+            }
+        }
+        return camel.toString();
+    }
 }
