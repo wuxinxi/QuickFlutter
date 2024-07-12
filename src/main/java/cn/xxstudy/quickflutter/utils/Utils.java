@@ -140,7 +140,7 @@ public class Utils {
     }
 
     public static void writeLog(String content) {
-        if (true) return;
+//        if (true) return;
         try {
 //            String logPath=System.getProperty("user.dir");
             String logPath = "/Users/sensiwu/Desktop";

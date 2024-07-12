@@ -69,5 +69,10 @@
             <add-to-group group-id="CodeMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift meta T"/>
         </action>
+        <action id="cn.xxstydu.shortcut.RequiredConstructor"
+                class="cn.xxstudy.quickflutter.shortcut.RequiredConstructor" text="RequiredConstructor"
+                description="RequiredConstructor">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>
