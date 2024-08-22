@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 ///
 
 class ${className} extends StatefulWidget {
-  const ${className}({Key? key}) : super(key: key);
+  const ${className}({super.key});
 
   @override
-  _${className}State createState() => _${className}State();
+  State<${className}> createState() => _${className}State();
 }
 
 class _${className}State extends State<${className}> {

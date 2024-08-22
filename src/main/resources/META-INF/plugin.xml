@@ -32,7 +32,11 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="cn.xxstudy.quickflutter.services.StorageService"/>
-        <projectConfigurable parentId="tools" instance="cn.xxstudy.quickflutter.ui.SettingsConfiguration"/>
+        <projectConfigurable parentId="tools"
+                             instance="cn.xxstudy.quickflutter.ui.SettingsConfiguration"
+                             id="cn.xxstudy.quickflutter.ui.SettingsConfiguration"
+                             displayName="QuickFlutter"
+                             nonDefaultProject="true"/>
 
         <psi.referenceContributor language="yaml"
                                   implementation="cn.xxstudy.quickflutter.provider.yaml.YamlAssetReferenceContributor"/>

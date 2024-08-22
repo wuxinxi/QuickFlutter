@@ -1,5 +1,6 @@
 package cn.xxstudy.quickflutter.ui;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class GenerateDartWidgetDialog extends DialogWrapper {
     private JPanel contentPanel;
 
     public GenerateDartWidgetDialog(final Listener listener) {
-        super(null);
+        super((Project) null);
         this.listener = listener;
         init();
     }

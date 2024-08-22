@@ -1,10 +1,11 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.5.2"
+    id("org.jetbrains.kotlin.jvm") version "1.9.24"
+    id("org.jetbrains.intellij") version "1.17.3"
 }
 
 group = "cn.xxstudy"
-version = "1.3-SNAPSHOT"
+version = "1.4-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -13,8 +14,9 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2021.2")
+    version.set("2023.2.6")
     type.set("IC") // Target IDE Platform
+//    localPath.set("/Applications/Android Studio.app/Contents")
 
     plugins.set(listOf("com.intellij.java"))
 }
@@ -22,13 +24,13 @@ intellij {
 tasks {
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 
     patchPluginXml {
-        sinceBuild.set("200")
-        untilBuild.set("222.*")
+        sinceBuild.set("232")
+        untilBuild.set("242.*")
     }
 
     signPlugin {
