@@ -17,7 +17,11 @@ import com.intellij.util.IconUtil;
 import com.intellij.util.SVGLoader;
 import org.jetbrains.annotations.NotNull;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.Collection;
 
 /**
@@ -55,7 +59,7 @@ public class YamlAssetLineMarkerProvider extends RelatedItemLineMarkerProvider {
             } else {
                 try {
                     icon = virtualFile != null
-                            ? IconUtil.getIcon(virtualFile, Iconable.ICON_FLAG_VISIBILITY, element.getProject())
+                            ? loadImageIcon(virtualFile)
                             : AllIcons.General.LayoutPreviewOnly;
                 } catch (Exception e) {
                     icon = AllIcons.General.LayoutPreviewOnly;
@@ -70,6 +74,18 @@ public class YamlAssetLineMarkerProvider extends RelatedItemLineMarkerProvider {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private Icon loadImageIcon(VirtualFile virtualFile) throws Exception {
+        try (InputStream inputStream = virtualFile.getInputStream()) {
+            BufferedImage bufferedImage = ImageIO.read(inputStream);
+            if (bufferedImage != null) {
+                Image scaledImage = bufferedImage.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+                return new ImageIcon(scaledImage);
+            } else {
+                return AllIcons.General.LayoutPreviewOnly;
+            }
         }
     }
 
