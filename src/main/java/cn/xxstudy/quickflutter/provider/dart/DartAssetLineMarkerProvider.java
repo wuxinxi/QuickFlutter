@@ -1,5 +1,6 @@
 package cn.xxstudy.quickflutter.provider.dart;
 
+import cn.xxstudy.quickflutter.provider.yaml.YamlAssetLineMarkerProvider;
 import cn.xxstudy.quickflutter.services.StorageService;
 import cn.xxstudy.quickflutter.utils.Utils;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
@@ -74,7 +75,7 @@ public class DartAssetLineMarkerProvider extends RelatedItemLineMarkerProvider {
             } else {
                 try {
                     icon = virtualFile != null
-                            ? IconUtil.getIcon(virtualFile, Iconable.ICON_FLAG_VISIBILITY, element.getProject())
+                            ? YamlAssetLineMarkerProvider.loadImageIcon(virtualFile)
                             : AllIcons.General.LayoutPreviewOnly;
                 } catch (Exception e) {
                     icon = AllIcons.General.LayoutPreviewOnly;

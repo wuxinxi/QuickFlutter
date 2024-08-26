@@ -77,7 +77,7 @@ public class YamlAssetLineMarkerProvider extends RelatedItemLineMarkerProvider {
         }
     }
 
-    private Icon loadImageIcon(VirtualFile virtualFile) throws Exception {
+    public static Icon loadImageIcon(VirtualFile virtualFile) throws Exception {
         try (InputStream inputStream = virtualFile.getInputStream()) {
             BufferedImage bufferedImage = ImageIO.read(inputStream);
             if (bufferedImage != null) {
